@@ -28,6 +28,7 @@ A dynamic HTTP server that simulates any API endpoint using Google's Gemini AI. 
 1. Download the release from releases page
 
 2. Set your Gemini API key as an environment variable:
+
 Windows
 ```bash
 set GEMINI_API_KEY=your_api_key_here
@@ -46,6 +47,7 @@ git clone https://github.com/yourusername/infinite_api.git
 cd infinite_api
 ```
 2. Set your Gemini API key as an environment variable:
+
 Windows
 ```bash
 set GEMINI_API_KEY=your_api_key_here
