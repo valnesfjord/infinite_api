@@ -28,45 +28,56 @@ A dynamic HTTP server that simulates any API endpoint using Google's Gemini AI. 
 1. Download the release from releases page
 
 2. Set your Gemini API key as an environment variable:
-
-# Windows
-
+Windows
+```bash
 set GEMINI_API_KEY=your_api_key_here
-
-# Linux/macOS
-
+```
+Linux/macOS
+```bash
 export GEMINI_API_KEY=your_api_key_here
-
+```
 3. Run server
 
 ### Installation (building for you own system)
 
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/infinite_api.git
-    cd infinite_api
-    ```
+```bash
+git clone https://github.com/yourusername/infinite_api.git
+cd infinite_api
+```
 2. Set your Gemini API key as an environment variable:
-
-# Windows
-
+Windows
+```bash
 set GEMINI_API_KEY=your_api_key_here
-
-# Linux/macOS
-
+```
+Linux/macOS
+```bash
 export GEMINI_API_KEY=your_api_key_here
-
-3. Build the project: cargo build --release
+```
+3. Build the project:
+```bash
+cargo build --release
+```
 
 ## 🔧 Usage
 
-1. Start the server (manual mode) cargo run --release
+1. Start the server (manual mode)
+```bash
+cargo run --release
+```
 
-2. The server will listen on http://127.0.0.1:1337
+3. The server will listen on http://127.0.0.1:1337
 
-3. Access any endpoint to see dynamically generated responses: http://127.0.0.1:1337/api/users http://127.0.0.1:1337/products/123 http://127.0.0.1:1337/login http://127.0.0.1:1337/about http://127.0.0.1:1337/status
+4. Access any endpoint to see dynamically generated responses:
+```
+http://127.0.0.1:1337/api/users
+http://127.0.0.1:1337/products/123
+http://127.0.0.1:1337/login
+http://127.0.0.1:1337/about
+http://127.0.0.1:1337/status
+```
 
-4. Observe how different endpoints return different response types with appropriate content
+5. Observe how different endpoints return different response types with appropriate content
 
 ## 📖 How It Works
 
