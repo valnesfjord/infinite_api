@@ -24,6 +24,24 @@ struct Metadata {
     content_type: String,
 }
 
+#[derive(Debug, Deserialize)]
+struct GeminiTextResponse {
+    candidates: Vec<Candidate>,
+}
+
+#[derive(Debug, Deserialize)]
+struct Candidate {
+    content: Content,
+}
+#[derive(Debug, Deserialize)]
+struct Content {
+    parts: Vec<Part>,
+}
+#[derive(Debug, Deserialize)]
+struct Part {
+    text: String,
+}
+
 static KEY: LazyLock<String> = LazyLock::new(|| {
     env::var("GEMINI_API_KEY").unwrap_or_else(|_| {
         eprintln!("Error: GEMINI_API_KEY environment variable not set");
@@ -73,7 +91,7 @@ Based on the endpoint pattern, choose from these response types:
    - Use appropriate error status code (400, 401, 403, 404, 500)
    - Include meaningful error messages
 
-Be creative and realistic with your responses. If the endpoint suggests a specific data domain (users, products, etc.), generate plausible mock data. Consider REST conventions and HTTP semantics when determining the appropriate response type.
+Be creative and realistic with your responses. Consider REST conventions and HTTP semantics when determining the appropriate response type.
 
 Examples of endpoints to respond to:
 - /api/users
@@ -147,18 +165,12 @@ async fn response_examples(
     let body = resp.bytes().await.expect("Failed to read response body");
     let body = String::from_utf8(body.to_vec()).expect("Failed to convert bytes to string");
 
-    let json_response: serde_json::Value =
-        serde_json::from_str(&body).expect("Failed to parse JSON");
-    let candidates = json_response["candidates"].as_array().unwrap()[0]["content"]
-        .as_object()
-        .unwrap()["parts"]
-        .as_array()
-        .unwrap()[0]["text"]
-        .as_str()
-        .unwrap();
+    let candidates: GeminiTextResponse =
+        serde_json::from_str(&body).expect("Failed to parse JSON. Recheck connection and API key.");
 
     let json_response: GeminiResponse = serde_json::from_str(
-        &candidates
+        &candidates.candidates[0].content.parts[0]
+            .text
             .replace("```json", "")
             .replace("```", "")
             .replace("\n", ""),
